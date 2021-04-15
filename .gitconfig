@@ -1,0 +1,76 @@
+[reviewboard]
+	url = https://reviewboard-vbn.alstom.hub/
+[clangFormat]
+	binary = clang-format
+	extension = c, h
+	style = file
+[init]
+	templatedir = /home/dev/ouroboros/tools/git-templates/
+[user]
+	login = e_jcollo
+	name = Joris COLLOMB
+	email = joris.collomb-ext@alstomgroup.com
+    if = enp0s9
+[push]
+	default = simple
+[core]
+	autocrlf = off
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[color]
+	status = always
+	ui = true
+[alias]
+	l  = log --decorate=short --graph --oneline --exclude='*/archive/*'
+	la = log --decorate=short --graph --oneline --exclude='*/archive/*' --all
+	lo = log --decorate=short --graph --oneline --all
+	amend = commit -a --amend -C HEAD
+	checkpoint = commit -a --fixup=HEAD
+	c = checkout
+	s = status
+	r = rebase
+	cp = cherry-pick
+	d = diff
+	# list my branch with a fancy formating 
+	lb = "! git branch --list wip/jco/* -vv --format='%(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:cyan)%(upstream:short)%(color:reset)'"
+	fixup = !GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash
+	# going up into the git tree, commit by commit, to meet the specified branch, or else master.
+	# this version go only on the "right" son, this avoid visit of all intermediary commit
+	go-up-to = "!git checkout $(git rev-list --first-parent HEAD..\"${1:-master}\" | tail -n 1) #"
+	# this version go to every freakin commit
+	# go-up-to = "!git checkout $(git rev-list HEAD..\"${1:-master}\" | tail -n 1) #"
+	
+	# suppose to archive a branch, but that's a mess because its only on local branch, 
+	# so remote still exist and its pain because now they have different name. should do a 
+	# function, and rename distant branch and all
+	archive-branch = "!archive_branch \"$1\" #"
+	#archive-branch = "!git branch -m wip/jco/\"$1\" archive/jco/\"$1\" #"
+	# usage: during a rebase, when "deleted by them" do "git deleted diff base_branch rebased_branch file" to view diff of this deleted file
+	deleted-diff = "!git diff \"$1\"..$(git merge-base \"$1\" \"$2\") -- \"$GIT_PREFIX$3\" #"
+	# use to now what an alias do, usage example: git type checkpoint
+	type = "!git config --get-regexp ^alias | grep alias.\"$1 \" | sed -e s/^alias.//g  #"
+	# clean project.xml from ouroboros project
+	project-xml-clean = checkout -- '/home/dev/ouroboros/css/dist/integration/*/project.xml'
+	# do a find -name on $1 and exec git blame on each result. Pretty proud of that.
+	# this is a alias to a bash function in ~/.local/bin/git-findblame
+	# git-findblame can't be completed with tab if you start with "git find<tab><tab>, so this alias is just here for autocompletion
+	findblame = "!git findblame \"$1\" #"
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[diff-so-fancy]
+	markEmptyLines = false
+[pager]
+	status = true
+	color = true
+[merge]
+	tool = vimdiff
