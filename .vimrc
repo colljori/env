@@ -1,5 +1,5 @@
   "#####################################################"
-"                  COLLJORI VIMRC FILE: 
+"                  COLLJORI VIMRC FILE:
   "#####################################################"
 
 " BASIC SETUP:
@@ -13,9 +13,9 @@ let &runtimepath.=','.vimDir
 " don't try to be vi-compatible
 set nocompatible
 
-" enable hidden state for buffed filed, allow to switch from one file to 
+" enable hidden state for buffed filed, allow to switch from one file to
 " another without mandatory writing
-set hidden 
+set hidden
 
 " set scroll offset to always have some line available above the cursor
 set scrolloff=10
@@ -27,14 +27,14 @@ filetype plugin on
 " set default clipboard to the system one
 set clipboard^=unnamed,unnamedplus
 
-" store buffer list in viminfo, so when accidentally :q buffer list will 
+" store buffer list in viminfo, so when accidentally :q buffer list will
 " still be there at next start
 set viminfo^=%
 
 " do not wrap at the begining of the file while pressing n during search
 set nowrapscan
 
-" do not wrap if a line is too long to be displayed 
+" do not wrap if a line is too long to be displayed
 set nowrap
 
 " ask for confirmation to close file. This is usefull when closing multiple
@@ -97,30 +97,43 @@ let g:netrw_fastbrowse = 0
 " - Hit tab to :find by partial match
 " - Use * to make it fuzzy
 
-" KEY REMAP:
+
+" SEARCHING IN FILES:
   "####################"
+
+" map vimgrep on F4, search for word under the cursor in all file recursively.
+" Do not jump, just populate quickfix tab
+" if file does not have extension, search in all file in current location
+" (warning, this can be very long)
+map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj **/*'.(expand("%:e")=="" ? "" : ".".expand("%:e"))  <Bar> cw<CR>
 
 " shortcut to un-hilighted the current text
 " to delete if to much strange behavior
 noremap <esc> :noh<return><esc>
 " vim use esc internally, this is mandatory to remap it without too much issue
 nnoremap <esc>^[ <esc>^[
- 
-" shortcut // to search for visually selected text 
+
+" shortcut // to search for visually selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " shortcut to vimgrep on every file with a given extension
-command -nargs=+ Vim :vimgrep // **/*.<args> 
+command -nargs=+ Vim :vimgrep // **/*.<args>
 
+" Following vimgrep shortcut are just legacy, as superior one have been found
+"
 " these are just shorcut of the Vim command, I just keep them for posterity
 " shortcut to vimgrep on every C source file
-command Vimc vimgrep // **/*.h **/*.c 
+command Vimc vimgrep // **/*.h **/*.c
 
 " shortcut to vimgrep on every ADA source file
-command Vimada vimgrep // **/*.adb **/*.ads 
+command Vimada vimgrep // **/*.adb **/*.ads
 
-" shortcut to vimgrep on every C source file
-command Buildrootfs make -C $CSS_ROOT/src/linux rfs_css_gtw 
+
+" OTHER KEY REMAP AND SHORTCUT:
+  "####################"
+
+" build the css_gtw inside vim. Quickfix is filled with compilation error
+command Buildrootfs make -C $CSS_ROOT/src/linux rfs_css_gtw
 
 " binding to print buffer list and chose one in one command
 nnoremap ²b :ls<cr>:b<space>
@@ -167,7 +180,7 @@ highlight Normal guibg=Black
 "
 " hilight all match of search
 set hlsearch
-" line number is display in relative to the current one. Current one are 
+" line number is display in relative to the current one. Current one are
 " still absolute thanks to number
 set number relativenumber
 
@@ -175,9 +188,9 @@ set number relativenumber
 "hilight a right margin, 100 char because that what's used on convergence
 "project
 set colorcolumn=100
- 
 
-" TRAILING SPACE: 
+
+" TRAILING SPACE:
   "####################"
     " Strip whitespace {
     function! StripTrailingWhitespace()
@@ -196,7 +209,7 @@ set colorcolumn=100
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
 
 
-" STATUS LINE: 
+" STATUS LINE:
   "####################"
 " always show status line, even when only one file is open
 set laststatus=2
@@ -207,7 +220,7 @@ set rtp+=/opt/python2-venv/lib/python2.7/site-packages/powerline/bindings/vim
 
 " ENVIRONMENT:
 " ##################"
-" some shit specific to the environment 
+" some shit specific to the environment
 
 " use to have bash env into vim env. This is experimental for me.
 " this is usefull for make to have access to the full env even in vim.
