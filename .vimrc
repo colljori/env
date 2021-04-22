@@ -107,6 +107,11 @@ let g:netrw_fastbrowse = 0
 " (warning, this can be very long)
 map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj **/*'.(expand("%:e")=="" ? "" : ".".expand("%:e"))  <Bar> cw<CR>
 
+" this is really ugly and all, but I have not find something cool to search in
+" multiple path with vimgrep.. so switching context mate
+map <F5> :cd /home/dev/ouroboros/css/swint/ <Bar> cw<CR>
+map <F6> :cd /home/dev/ouroboros/swint/ <Bar> cw<CR>
+
 " shortcut to un-hilighted the current text
 " to delete if to much strange behavior
 noremap <esc> :noh<return><esc>
