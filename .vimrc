@@ -109,8 +109,8 @@ map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj **/*'.(expand("%:e")=="" ? 
 
 " this is really ugly and all, but I have not find something cool to search in
 " multiple path with vimgrep.. so switching context mate
-map <F5> :cd /home/dev/ouroboros/css/swint/ <Bar> cw<CR>
-map <F6> :cd /home/dev/ouroboros/swint/ <Bar> cw<CR>
+map <F5> :cd /home/dev/ouroboros/css/ <CR>
+map <F6> :cd /home/dev/ouroboros/swint/ <CR>
 
 " shortcut to un-hilighted the current text
 " to delete if to much strange behavior
