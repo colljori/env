@@ -43,6 +43,9 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 bind '"\e[C": forward-char'
 bind '"\e[D": backward-char'
+# ok I love this too much
+bind '"\C-p": history-search-backward'
+bind '"\C_n": history-search-forward'
 
 ##############################################################
 
