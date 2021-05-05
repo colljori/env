@@ -20,8 +20,13 @@
 	status = always
 	ui = true
 [alias]
+    # all under HEAD
 	l  = log --decorate=short --graph --oneline --exclude='*/archive/*'
-	la = log --decorate=short --graph --oneline --exclude='*/archive/*' --all
+    # all under master, beta1, or my branches
+    la = log --decorate=short --graph --oneline --glob={*wip/jco*,*master*,*1.0.0_beta1*}
+    # all but not archived
+	laa = log --decorate=short --graph --oneline --exclude='*/archive/*' --all
+    # all
 	lo = log --decorate=short --graph --oneline --all
 	amend = commit -a --amend -C HEAD
 	checkpoint = commit -a --fixup=HEAD
