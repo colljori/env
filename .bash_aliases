@@ -27,3 +27,4 @@ alias sgrep_source="grep -nRI --include \*.h --include \*.c --include \*.adb --i
 alias sgrep_color="grep -nRI --color=always --include \*.h --include \*.c --include \*.adb --include \*.ads -- $@ 2> /dev/null"
 
 alias cs_less="cs_analyzelogs A sl -n 0 -f $@ | less -R"
+alias toto="echo \$1 && echo double \$1 && echo triple \$1"
