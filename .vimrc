@@ -20,6 +20,10 @@ set hidden
 " set scroll offset to always have some line available above the cursor
 set scrolloff=10
 
+" set the ruler (position of the cursor in the status line) to a more basic
+" format (no byte count vs char number count)
+set rulerformat=%l,%v
+
 " enable syntax and plugins (for netrw)
 syntax enable
 filetype plugin on
@@ -111,6 +115,7 @@ map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj **/*'.(expand("%:e")=="" ? 
 " multiple path with vimgrep.. so switching context mate
 map <F5> :cd /home/dev/ouroboros/css/ <CR>
 map <F6> :cd /home/dev/ouroboros/swint/ <CR>
+map <F7> :cd /home/dev/ouroboros/cs_common/ <CR>
 
 " shortcut to un-hilighted the current text
 " to delete if to much strange behavior
