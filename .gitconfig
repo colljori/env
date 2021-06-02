@@ -26,6 +26,8 @@
     la = "!git log --decorate=short --graph --oneline --glob={*wip/jco*,*master*,*1.0.0_beta1*}"
     # all but not archived
 	laa = log --decorate=short --graph --oneline --exclude='*/archive/*' --all
+    # all, even untrack
+	laaa = log --decorate=short --graph --oneline --exclude='*/archive/*' --all --reflog
     # all
 	lo = log --decorate=short --graph --oneline --all
 	amend = commit -a --amend -C HEAD
