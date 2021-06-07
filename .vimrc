@@ -70,6 +70,10 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 
+" I'm sick of vimrc reload, just use F2
+map <F2> :source $MYVIMRC <CR>
+
+
 " FINDING FILES:
   "####################"
 " Search down into subfolders
@@ -142,6 +146,10 @@ command Vimada vimgrep // **/*.adb **/*.ads
 " OTHER KEY REMAP AND SHORTCUT:
   "####################"
 
+" CTRL-p will paste the last yank text
+nnoremap <C-p> "0p
+nnoremap <C-P> "0P
+
 " build the css_gtw inside vim. Quickfix is filled with compilation error
 command Buildrootfs make -C $CSS_ROOT/src/linux rfs_css_gtw
 
@@ -176,6 +184,24 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-W>z :ZoomToggle<CR>
 
+" when searching for stuff and press n, the next match will blink
+" interting, but I don't know how to make this work
+" https://www.youtube.com/watch?v=aHm36-na4-4
+"function! HLNext (blinktime)
+"    let [bufnum, lnum, col, off] = getpos('.')
+"    let matchlen = strlen(matchstr,strpart(getline('.'),col-1),@/))
+"    let taget_pat = '\c\%#'.@/
+"    let blinks = 3
+"    for n in range(1,blinks)
+"        let red = matchadd('WhiteOnRed', target_pat, 101)
+"        redraw
+"        exec 'sleep' . float2nr(a:blinktime / (2*blinks) * 1000) . 'm'
+"        call matchdelete(red)
+"        redraw
+"        exec 'sleep' . float2nr(a:blinktime / (2*blinks) * 1000) . 'm'
+"    endfor
+"endfunction
+"nnoremap n :call HLNext(1)<CR>
 
 " FOR STYLE:
   "####################"
@@ -197,7 +223,10 @@ set number relativenumber
 
 "hilight a right margin, 100 char because that what's used on convergence
 "project
-set colorcolumn=100
+"set colorcolumn=100
+"ok this is way less dependant on colorscheme of the virtual terminal (don't ask me)
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%131v')
 
 
 " TRAILING SPACE:
