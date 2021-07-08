@@ -44,14 +44,17 @@ bind '"\e[B": history-search-forward'
 bind '"\e[C": forward-char'
 bind '"\e[D": backward-char'
 # ok I love this too much
-bind '"\C-p": history-search-backward'
-bind '"\C_n": history-search-forward'
+#bind '"\C-p": history-search-backward'
+#bind '"\C_n": history-search-forward'
 
 ##############################################################
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+# expand dir when stored in env var
+shopt -s direxpand
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
@@ -67,7 +70,7 @@ fi
 
 if [[ -z "$TMUX"  ]]; then
     export TERM='xterm-256color'
-else 
+else
     export TERM='screen-256color'
 fi
 
@@ -154,7 +157,7 @@ fi
 # Run twolfson/sexy-bash-prompt
 . ~/.bash_prompt
 
-# usefull function for bash utility 
+# usefull function for bash utility
 source /home/dev/.local/bin/bash_function.sh
 
 export PATH=$PATH:/home/dev/bin/
@@ -168,7 +171,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # as I have grant w access to all for ouroboros, this tweak avoid the ugly 'other writable' color
-# but this was working on ubuntu, it didn't work since centos. 
+# but this was working on ubuntu, it didn't work since centos.
 # eval "$(dircolors ~/.dircolors)";
 
 # source env file from ouroboros
@@ -192,9 +195,10 @@ export CS_ROOT=~/ouroboros
 path_append "$TOOLS_ROOT/scripts/"
 path_append "$CS_ROOT/.bin/"
 
-# disable css linker diversification, cause meh, three time the compile 
+# disable css linker diversification, cause meh, three time the compile
 # is hard on my shoulder...
-DISABLE_DIVERSIFICATION=1 
+DISABLE_DIVERSIFICATION=1
+FAST_GENERATION=1
 
 # use of powerline for bash prompt. Need a lot of tweaking to be used on convergence
 # (add of rack state and git integration)
