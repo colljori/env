@@ -79,5 +79,3 @@
 [pager]
 	status = true
 	color = true
-[merge]
-	tool = vimdiff
