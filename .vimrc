@@ -94,13 +94,6 @@ let g:netrw_liststyle = 3
 " automatically close netrw buffer after openning file
 let g:netrw_fastbrowse = 0
 
-" when pressing v in netwr, the open file will be on the left rather than
-" right
-" let g:netrw_altv=1
-" set splitbelow
-" set splitright
-" I don't like it so much because it's quite a pain to handle split size
-
 " NOW WE CAN
 " - Hit tab to :find by partial match
 " - Use * to make it fuzzy
@@ -184,24 +177,6 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-W>z :ZoomToggle<CR>
 
-" when searching for stuff and press n, the next match will blink
-" interting, but I don't know how to make this work
-" https://www.youtube.com/watch?v=aHm36-na4-4
-"function! HLNext (blinktime)
-"    let [bufnum, lnum, col, off] = getpos('.')
-"    let matchlen = strlen(matchstr,strpart(getline('.'),col-1),@/))
-"    let taget_pat = '\c\%#'.@/
-"    let blinks = 3
-"    for n in range(1,blinks)
-"        let red = matchadd('WhiteOnRed', target_pat, 101)
-"        redraw
-"        exec 'sleep' . float2nr(a:blinktime / (2*blinks) * 1000) . 'm'
-"        call matchdelete(red)
-"        redraw
-"        exec 'sleep' . float2nr(a:blinktime / (2*blinks) * 1000) . 'm'
-"    endfor
-"endfunction
-"nnoremap n :call HLNext(1)<CR>
 
 " FOR STYLE:
   "####################"
