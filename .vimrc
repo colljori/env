@@ -102,6 +102,9 @@ let g:netrw_fastbrowse = 0
 " SEARCHING IN FILES:
   "####################"
 
+" start searching before pressing enter
+set incsearch
+
 " map vimgrep on F4, search for word under the cursor in all file recursively.
 " Do not jump, just populate quickfix tab
 " if file does not have extension, search in all file in current location
