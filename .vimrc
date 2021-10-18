@@ -226,6 +226,13 @@ call matchadd('ColorColumn', '\%131v')
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
 
 
+" AUTOCMD FOR SYNTAXE:
+  "####################"
+" set the syntax of all .log file to cs_logs
+" (cf. /usr/share/vim/vim74/syntax/cs_logs.vim)
+autocmd BufNewFile,BufRead *.log setf cs_logs
+
+
 " STATUS LINE:
   "####################"
 " always show status line, even when only one file is open
