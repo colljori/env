@@ -250,3 +250,18 @@ set rtp+=/opt/python2-venv/lib/python2.7/site-packages/powerline/bindings/vim
 " this is usefull for make to have access to the full env even in vim.
 set shell=bash\ -l
 
+" PLUGIN:
+" #################"
+" Ok I promise to myself I would not use plugin... but, only idiots do not
+" change their mind right ?
+
+" Specify a directory for plugins
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/colljori_plugged')
+
+Plug 'junegunn/vim-peekaboo'
+" I don't know how it work, but I would like it to be horizontal
+"g:peekaboo_window vert bo 30new
+
+" Initialize plugin system
+call plug#end()
