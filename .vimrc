@@ -73,6 +73,26 @@ set expandtab
 " I'm sick of vimrc reload, just use F2
 map <F2> :source $MYVIMRC <CR>
 
+" This function allow push yank stuff to be push to numbered reg
+" (just like deleted / modified text)
+" source : https://vi.stackexchange.com/questions/26818/vim-not-storing-numbered-registers
+function! SaveLastReg()
+    if v:event['regname']==""
+        if v:event['operator']=='y'
+            for i in range(8,1,-1)
+                exe "let @".string(i+1)." = @". string(i)
+            endfor
+            if exists("g:last_yank")
+                let @1=g:last_yank
+            endif
+            let g:last_yank=@"
+        endif
+    endif
+endfunction
+
+" this call the SaveLastReg function on any yank. But this did not work, as we
+" are using 2013 vim. Youpi
+"autocmd TextYankPost * call SaveLastReg()
 
 " FINDING FILES:
   "####################"
