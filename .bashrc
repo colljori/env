@@ -161,6 +161,8 @@ fi
 source /home/dev/.local/bin/bash_function.sh
 
 export PATH=$PATH:/home/dev/bin/
+export PATH=$PATH:/home/dev/.local/bin/
+
 stty -ixon
 
 # less is by default with case insensitive search
