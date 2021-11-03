@@ -270,6 +270,7 @@ set rtp+=/opt/python2-venv/lib/python2.7/site-packages/powerline/bindings/vim
 " this is usefull for make to have access to the full env even in vim.
 set shell=bash\ -l
 
+
 " PLUGIN:
 " #################"
 " Ok I promise to myself I would not use plugin... but, only idiots do not
@@ -279,11 +280,15 @@ set shell=bash\ -l
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/colljori_plugged')
 
+
+" PEEKABOO:
+" ####
 " when pressing " this will show register content
 Plug 'junegunn/vim-peekaboo'
 let g:peekaboo_window = 'vert bo 60new'
 
-" fuzzy file finder
+" FZF:
+" #### fuzzy file finder
 Plug 'junegunn/fzf'
 " this is the recommanded version, but this not work (idk)
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -294,6 +299,11 @@ let g:fzf_buffers_jump = 1
 "let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 "let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4"
 "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'
+
+"some shortcut to search between buffer, files or tracked files
+map <F10> :Buffers <CR>
+map <F11> :Files <CR>
+map <F12> :GFiles <CR>
 
 " Initialize plugin system
 call plug#end()
