@@ -208,3 +208,6 @@ FAST_GENERATION=1
 
 # test with clipboard binding. Need xsel, don't have it.
 # bind '"\C-p": "\C-e\C-u xsel <<"EOF"\n\C-y\nEOF\n\C-y"'
+
+# source FZF, this is a general purpose fuzzy file finder
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

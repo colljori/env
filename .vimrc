@@ -259,9 +259,21 @@ set shell=bash\ -l
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/colljori_plugged')
 
+" when pressing " this will show register content
 Plug 'junegunn/vim-peekaboo'
-" I don't know how it work, but I would like it to be horizontal
-"g:peekaboo_window vert bo 30new
+let g:peekaboo_window = 'vert bo 60new'
+
+" fuzzy file finder
+Plug 'junegunn/fzf'
+" this is the recommanded version, but this not work (idk)
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" this is the vim wrapper for fzf
+Plug 'junegunn/fzf.vim'
+" if already open, jump to the corresponding buffer
+let g:fzf_buffers_jump = 1
+"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+"let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4"
+"fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'
 
 " Initialize plugin system
 call plug#end()
