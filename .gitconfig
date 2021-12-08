@@ -37,7 +37,7 @@
 	r = rebase
 	cp = cherry-pick
 	d = diff
-	# list my branch with a fancy formating 
+	# list my branch with a fancy formating
 	lb = "! git branch --list wip/jco/* -vv --format='%(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:cyan)%(upstream:short)%(color:reset)'"
 	fixup = !GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash
 	# going up into the git tree, commit by commit, to meet the specified branch, or else master.
@@ -46,8 +46,8 @@
 	# this version go to every freakin commit
 	# go-up-to = "!git checkout $(git rev-list HEAD..\"${1:-master}\" | tail -n 1) #"
 	
-	# suppose to archive a branch, but that's a mess because its only on local branch, 
-	# so remote still exist and its pain because now they have different name. should do a 
+	# suppose to archive a branch, but that's a mess because its only on local branch,
+	# so remote still exist and its pain because now they have different name. should do a
 	# function, and rename distant branch and all
 	archive-branch = "!archive_branch \"$1\" #"
 	#archive-branch = "!git branch -m wip/jco/\"$1\" archive/jco/\"$1\" #"
@@ -61,6 +61,8 @@
 	# this is a alias to a bash function in ~/.local/bin/git-findblame
 	# git-findblame can't be completed with tab if you start with "git find<tab><tab>, so this alias is just here for autocompletion
 	findblame = "!git findblame \"$1\" #"
+    # squash the last N commit
+	squash = "!git reset --soft HEAD~\"$1\" && git merge --squash HEAD@{1} && git commit -m \"${2:-squashed commit}\" #"
 
 [color "diff-highlight"]
 	oldNormal = red bold
