@@ -211,3 +211,4 @@ export FAST_GENERATION=1
 
 # source FZF, this is a general purpose fuzzy file finder
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_OPS="--extended"
