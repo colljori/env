@@ -79,3 +79,5 @@
 [pager]
 	status = true
 	color = true
+[http]
+	sslVerify = false

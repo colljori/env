@@ -200,7 +200,7 @@ path_append "$CS_ROOT/.bin/"
 # disable css linker diversification, cause meh, three time the compile
 # is hard on my shoulder...
 DISABLE_DIVERSIFICATION=1
-FAST_GENERATION=1
+export FAST_GENERATION=1
 
 # use of powerline for bash prompt. Need a lot of tweaking to be used on convergence
 # (add of rack state and git integration)
