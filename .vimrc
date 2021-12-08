@@ -305,5 +305,11 @@ map <F10> :Buffers <CR>
 map <F11> :Files <CR>
 map <F12> :GFiles <CR>
 
+" PEEKABOO:
+" ####
+" outline view of the current file
+Plug 'preservim/tagbar'
+nmap <F9> :TagbarToggle<CR>
+
 " Initialize plugin system
 call plug#end()
