@@ -28,3 +28,6 @@ alias sgrep_color="grep -nRI --color=always --include \*.h --include \*.c --incl
 
 alias cs_less="cs_analyzelogs A sl -n 0 -f $@ | less -R"
 alias toto="echo \$1 && echo double \$1 && echo triple \$1"
+
+alias cs_add_obs_ip='ip a show dev tun0 | grep -Eo 12[1-9] | xargs printf "ip a add 10.65.201.%d/24 dev eth1" | xargs ssh -F $SSH_CONFIG_FILE edgerouter'
+alias cs_del_obs_ip='ip a show dev tun0 | grep -Eo 12[1-9] | xargs printf "ip a del 10.65.201.%d/24 dev eth1" | xargs ssh -F $SSH_CONFIG_FILE edgerouter'
