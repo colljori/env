@@ -69,6 +69,8 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
+" for bash file, 2 seem the norm here
+autocmd FileType sh setlocal shiftwidth=2 softtabstop=2
 
 " I'm sick of vimrc reload, just use F2
 map <F2> :source $MYVIMRC <CR>
