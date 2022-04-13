@@ -202,6 +202,10 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-W>z :ZoomToggle<CR>
 
+"go to next and prev in quickfix windows
+map <F5> :cp <CR>
+map <F6> :cn <CR>
+
 
 " FOR STYLE:
   "####################"
@@ -315,3 +319,7 @@ nmap <F9> :TagbarToggle<CR>
 
 " Initialize plugin system
 call plug#end()
+
+
+nmap ,d :enew<bar>bd#<CR>
+nmap ,d :enew<bar>bd#<bar>bp<CR>
