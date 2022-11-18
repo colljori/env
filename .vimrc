@@ -135,9 +135,9 @@ map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj **/*'.(expand("%:e")=="" ? 
 
 " this is really ugly and all, but I have not find something cool to search in
 " multiple path with vimgrep.. so switching context mate
-map <F5> :cd /home/dev/ouroboros/css/ <CR>
-map <F6> :cd /home/dev/ouroboros/swint/ <CR>
-map <F7> :cd /home/dev/ouroboros/cs_common/ <CR>
+"map <F5> :cd /home/dev/ouroboros/css/ <CR>
+"map <F6> :cd /home/dev/ouroboros/swint/ <CR>
+"map <F7> :cd /home/dev/ouroboros/cs_common/ <CR>
 
 " shortcut to un-hilighted the current text
 " to delete if to much strange behavior
@@ -170,6 +170,7 @@ nnoremap <C-P> "0P
 
 " build the css_gtw inside vim. Quickfix is filled with compilation error
 command Buildrootfs make -C $CSS_ROOT/src/linux rfs_css_gtw
+command Klockwork make -C $CSS_ROOT/src/linux audit_klocwork
 
 " binding to print buffer list and chose one in one command
 nnoremap ²b :ls<cr>:b<space>
@@ -224,6 +225,8 @@ set hlsearch
 " still absolute thanks to number
 set number relativenumber
 
+" short cut to toggle line number
+map <F7> :set number! relativenumber! <CR>
 
 "hilight a right margin, 100 char because that what's used on convergence
 "project
@@ -311,7 +314,7 @@ map <F10> :Buffers <CR>
 map <F11> :Files <CR>
 map <F12> :GFiles <CR>
 
-" PEEKABOO:
+" TAGBAR:
 " ####
 " outline view of the current file
 Plug 'preservim/tagbar'
