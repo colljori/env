@@ -212,3 +212,6 @@ export FAST_GENERATION=1
 # source FZF, this is a general purpose fuzzy file finder
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_OPS="--extended"
+
+# I don't understand shit to x forward
+export DISPLAY=localhost:10.0
