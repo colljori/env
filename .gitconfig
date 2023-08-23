@@ -86,3 +86,7 @@
 	color = true
 [http]
 	sslVerify = false
+[pull]
+	rebase = true
+[credential]
+	helper = store

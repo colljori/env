@@ -45,6 +45,9 @@ set nowrap
 " unsaved files, and that q! don't want to clsoe
 set confirm
 
+" fuck swap
+set noswapfile
+
 " following allow persistent undo across vim sesssion
 
 " Keep undo history across sessions by storing it in a file
@@ -215,7 +218,8 @@ map <F6> :cn <CR>
 " set background=light
 " not to bad, but the background is little bit too bright
 set background=dark
-colorscheme solarized
+"colorscheme solarized
+"colorscheme atom-dark-256
 highlight Normal ctermbg=Black
 highlight Normal guibg=Black
 "
@@ -289,6 +293,10 @@ set shell=bash\ -l
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/colljori_plugged')
 
+" THEME:
+" ####
+" one dark, like in atom
+Plug 'joshdick/onedark.vim'
 
 " PEEKABOO:
 " ####
@@ -314,6 +322,14 @@ map <F10> :Buffers <CR>
 map <F11> :Files <CR>
 map <F12> :GFiles <CR>
 
+" GIT:
+" ####
+Plug 'tpope/vim-fugitive'
+" same as //, but without the very no magic shortcut for Ggrep search
+" pfff need work. Ho no it's working !
+" this quite make all SEARCHING IN FILES paragraph obselete...
+vnoremap g/ y<ESC>gg/<C-R>=escape(@",'/\')<CR><CR>:Ggrep "<C-R>/"<CR><CR>
+
 " TAGBAR:
 " ####
 " outline view of the current file
@@ -323,6 +339,7 @@ nmap <F9> :TagbarToggle<CR>
 " Initialize plugin system
 call plug#end()
 
+colorscheme onedark
 
 nmap ,d :enew<bar>bd#<CR>
 nmap ,d :enew<bar>bd#<bar>bp<CR>

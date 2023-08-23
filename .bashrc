@@ -1,5 +1,5 @@
-source /home/dev/ouroboros/tools/delivery/cs_commands.sh
 # bashrc: executed by bash(1) for non-login shells.
+
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -8,7 +8,6 @@ case $- in
     *i*) ;;
       *) return;;
 esac
-
 
 ##############################################################
 ## SANE HISTORY DEFAULTS ##
@@ -177,10 +176,18 @@ export EDITOR="$VISUAL"
 # eval "$(dircolors ~/.dircolors)";
 
 # source env file from ouroboros
-source /home/dev/ouroboros/.envrc css
+# pushd ~/ouroboros > /dev/null
+ source .envrc css
+# popd > /dev/null
+# completion broken by our envrc
+if [[ ! -d "/mnt/remote_repo/other_repo/.oh-my-zsh/plugins/gitfast/" ]]; then
+  sudo mount -a
+fi
+# ok it did not mount every time, but take ages so comment for now
+#source /mnt/remote_repo/other_repo/.oh-my-zsh/plugins/gitfast/git-completion.bash
 
 # usefull function for swint framework usage
-source /home/dev/.local/bin/swint_functions.sh
+# source /home/dev/.local/bin/swint_functions.sh
 
 # if resource, multivio will be MONO by default, so update it according to the reserved rack
 if [ -n "$(cs_getreservedrack)" ]; then
@@ -215,3 +222,22 @@ export FZF_DEFAULT_OPS="--extended"
 
 # I don't understand shit to x forward
 export DISPLAY=localhost:10.0
+
+# add rust to path
+export PATH=$PATH:/opt/rust-1.60.0/bin
+
+# use man of the current distrib of convergence target
+export MANPATH=/opt/cc-distrib-snap-20230201/poky/sysroots/aarch64-poky-linux/usr/share/man/
+
+m_debug_rust_analyzer() {
+  # executing those lines seems to make rust analyzer work...
+  cargo clippy --workspace --manifest-path /home/dev/ouroboros/reprog/Cargo.toml --target aarch64-unknown-linux-gnu --all-targets --all-features
+}
+
+
+export SWINT_LAYER=TRUE 
+export DEBUG_LAYER=debug-tools-small
+export TRAIN_PARAM=FORCED
+export XAUTHORITY=~/.Xauthority
+
+_cs_set_hosts_env
