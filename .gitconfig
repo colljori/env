@@ -63,7 +63,7 @@
 	# git-findblame can't be completed with tab if you start with "git find<tab><tab>, so this alias is just here for autocompletion
 	findblame = "!git findblame \"$1\" #"
     # find the branch from where the local branch have been created
-	starting = "!git starting #"
+	starting-branch = "!git starting #"
     # squash the last N commit
 	squash = "!git reset --soft HEAD~\"$1\" && git merge --squash HEAD@{1} && git commit -m \"${2:-squashed commit}\" #"
     # show the merge sha1 of a given commit
