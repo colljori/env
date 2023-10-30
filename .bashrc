@@ -9,6 +9,19 @@ case $- in
       *) return;;
 esac
 
+add_to_path() {
+  local new_entry=$1
+  case ":$PATH:" in
+    *":$new_entry:"*) :;; # already there
+    *) PATH="$new_entry:$PATH";; # or PATH="$PATH:$new_entry"
+  esac
+  export PATH
+}
+
+# for vscode
+workspaceFolder=~/analyser_workspace
+export workspaceFolder
+
 ##############################################################
 ## SANE HISTORY DEFAULTS ##
 
@@ -158,9 +171,10 @@ fi
 
 # usefull function for bash utility
 source /home/dev/.local/bin/bash_function.sh
+source /home/dev/.local/bin/git_script.sh
 
-export PATH=$PATH:/home/dev/bin/
-export PATH=$PATH:/home/dev/.local/bin/
+add_to_path "/home/dev/bin/"
+add_to_path "/home/dev/.local/bin/"
 
 stty -ixon
 
@@ -176,9 +190,9 @@ export EDITOR="$VISUAL"
 # eval "$(dircolors ~/.dircolors)";
 
 # source env file from ouroboros
-# pushd ~/ouroboros > /dev/null
- source .envrc css
-# popd > /dev/null
+pushd ~/ouroboros > /dev/null
+source .envrc css
+popd > /dev/null
 # completion broken by our envrc
 if [[ ! -d "/mnt/remote_repo/other_repo/.oh-my-zsh/plugins/gitfast/" ]]; then
   sudo mount -a
@@ -193,9 +207,6 @@ fi
 if [ -n "$(cs_getreservedrack)" ]; then
   _cs_set_rack_multi_vio
 fi
-
-# usefull function for sioux chad move
-for f in /home/dev/ouroboros/tools/sioux_scripts/*; do source $f; done
 
 # don't ask my why, without this git doesn't recognise clang-format...
 # it is done in .envrc, but for no fucking reason, if I don't resource
@@ -224,7 +235,7 @@ export FZF_DEFAULT_OPS="--extended"
 export DISPLAY=localhost:10.0
 
 # add rust to path
-export PATH=$PATH:/opt/rust-1.60.0/bin
+add_to_path "/opt/rust-1.60.0/bin"
 
 # use man of the current distrib of convergence target
 export MANPATH=/opt/cc-distrib-snap-20230201/poky/sysroots/aarch64-poky-linux/usr/share/man/
@@ -235,9 +246,12 @@ m_debug_rust_analyzer() {
 }
 
 
-export SWINT_LAYER=TRUE 
+export SWINT_LAYER=TRUE
 export DEBUG_LAYER=debug-tools-small
-export TRAIN_PARAM=FORCED
+#export TRAIN_PARAM=FORCED
 export XAUTHORITY=~/.Xauthority
 
 _cs_set_hosts_env
+
+# just to be sure, no duplicate in path
+export PATH=$(echo "$PATH" | tr ":" "\n" | awk '!visited[$0]++' | tr "\n" ":")

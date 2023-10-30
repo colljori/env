@@ -297,6 +297,9 @@ call plug#begin('~/.vim/colljori_plugged')
 " ####
 " one dark, like in atom
 Plug 'joshdick/onedark.vim'
+" better line between split
+set fillchars+=vert:▏
+highlight VertSplit ctermbg=2
 
 " PEEKABOO:
 " ####

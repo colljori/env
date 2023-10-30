@@ -22,12 +22,10 @@
 [alias]
     # all under HEAD
 	l  = log --decorate=short --graph --oneline --exclude='*/archive/*'
-    # all under master, beta1, or my branches
-    la = "!git log --decorate=short --graph --oneline --glob={*wip/jco*,*master*,*1.0.0_beta1*}"
     # all but not archived
-	laa = log --decorate=short --graph --oneline --exclude='*/archive/*' --all
+	la = log --decorate=short --graph --oneline --exclude='*/archive/*' --all
     # all, even untrack
-	laaa = log --decorate=short --graph --oneline --exclude='*/archive/*' --all --reflog
+	laa = log --decorate=short --graph --oneline --exclude='*/archive/*' --all --reflog
     # all
 	lo = log --decorate=short --graph --oneline --all
 	amend = commit -a --amend -C HEAD
@@ -37,8 +35,11 @@
 	r = rebase
 	cp = cherry-pick
 	d = diff
+    b = branch --sort=-committerdate --no-merged master
+    g = grep --no-recurse-submodules
+    mdiff = "!merge_based_diff() { git diff $(git merge-base HEAD \"$1\"); }; merge_based_diff"
 	# list my branch with a fancy formating
-	lb = "! git branch --list wip/jco/* -vv --format='%(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:cyan)%(upstream:short)%(color:reset)'"
+	lb = "! git branch --sort=-committerdate --no-merged master -vv --format='%(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:cyan)%(upstream:short)%(color:reset)'"
 	fixup = !GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash
 	# going up into the git tree, commit by commit, to meet the specified branch, or else master.
 	# this version go only on the "right" son, this avoid visit of all intermediary commit
@@ -61,6 +62,8 @@
 	# this is a alias to a bash function in ~/.local/bin/git-findblame
 	# git-findblame can't be completed with tab if you start with "git find<tab><tab>, so this alias is just here for autocompletion
 	findblame = "!git findblame \"$1\" #"
+    # find the branch from where the local branch have been created
+	starting = "!git starting #"
     # squash the last N commit
 	squash = "!git reset --soft HEAD~\"$1\" && git merge --squash HEAD@{1} && git commit -m \"${2:-squashed commit}\" #"
     # show the merge sha1 of a given commit
@@ -87,6 +90,8 @@
 [http]
 	sslVerify = false
 [pull]
-	rebase = true
+	ff = only
 [credential]
 	helper = store
+#[grep]
+#	excludesubmodules = true
