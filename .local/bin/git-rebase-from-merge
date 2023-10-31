@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+#################################################################################
+# VARIABLES
+###
+
+
+#################################################################################
+# SCRIPT
+###
+(
+  if [[ $# -ne 1 ]]; then 
+    echo "USAGE:$0 [REBASE_TARGET]" 
+    exit -1
+  else
+    # find the sha1 of the last merge starting from HEAD
+    # NOTE : for this script to work properly, your local branch shall not
+    # have made local merge since the branch creation
+    last_merge=$(git log --merges --pretty=format:"%H" -1)
+    # rebase from the last 
+    git rebase --onto $1 $last_merge $(git rev-parse --abbrev-ref HEAD)
+  fi
+)
