@@ -234,9 +234,6 @@ export FZF_DEFAULT_OPS="--extended"
 # I don't understand shit to x forward
 export DISPLAY=localhost:10.0
 
-# add rust to path
-add_to_path "/opt/rust-1.60.0/bin"
-
 # use man of the current distrib of convergence target
 export MANPATH=/opt/cc-distrib-snap-20230201/poky/sysroots/aarch64-poky-linux/usr/share/man/
 
@@ -252,6 +249,10 @@ export DEBUG_LAYER=debug-tools-small
 export XAUTHORITY=~/.Xauthority
 
 _cs_set_hosts_env
+
+# to be sure to be in front, just redo it
+export PATH="/opt/rust-1.60.0/bin:$PATH"
+#export PATH="~/.cargo/bin/:$PATH"
 
 # just to be sure, no duplicate in path
 export PATH=$(echo "$PATH" | tr ":" "\n" | awk '!visited[$0]++' | tr "\n" ":")
