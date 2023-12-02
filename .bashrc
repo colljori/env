@@ -164,6 +164,7 @@ fi
 # usefull function for bash utility
 source ~/.local/bin/bash_function.sh
 source ~/.local/bin/git_script.sh
+source ~/.bash_prompt
 
 add_to_path "~/bin/"
 add_to_path "~/.local/bin/"
