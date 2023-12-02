@@ -8,45 +8,47 @@
 ###
 
 
+## This script is deactivated for now as it don't make sens I think in my personal env (no multiple baseline or whatsoever)
 
 #################################################################################
 # SCRIPT
 ###
 (
-  source $TOOLS_ROOT/env/baseline_management.sh
-  # get the name of the local repo
-  local_repo=$(basename `git rev-parse --show-toplevel`)
-  # find in all branch available for this repo in BASELINE_BRANCHES
-  # this var is define in $TOOLS_ROOT/tools/env/baseline_management.sh
-  declare -a local_branches=()
-  for entry in "${!BASELINE_BRANCHES[@]}"; do
-    tested_repo="${entry#*, }"
-    if [[ "$local_repo" == "$tested_repo" ]]; then
-      if [[ ! ${local_branches[*]} =~ ${BASELINE_BRANCHES[$entry]} ]]; then 
-        local_branches+=(${BASELINE_BRANCHES[$entry]})
-      fi
-    fi
-  done
-
-  # we are not in a ouroboros repo, just exit
-  [[ -z "$local_branches" ]] && exit
-
-  # find the sha1 of the last merge starting from HEAD
-  # NOTE : for this script to work properly, your local branch shall not
-  # have made local merge since the branch creation
-  last_merge=$(git log --merges --pretty=format:"%H" -1)
-
-  # for each possible starting branch, find if the base of the local branch 
-  # is a commit of the said starting branch
-  for branch in "${local_branches[@]}"; do
-    if [[ $(git rev-parse --verify $branch 2>/dev/null) ]]; then
-      is_from_branch=$(git log $last_merge..$branch --ancestry-path -1 --pretty=format:"%H")
-      # this is a ugly case where the last merge is also the searched branch. We could have search for
-      # last_merge~, but when a branch is just created, it can be erroneos. Thus, in a second time, we
-      # check if last_merge==branch
-      [[ -z "$is_from_branch" && "$(git log --pretty=format:"%H" -1 $branch)" == "$last_merge" ]] && is_from_branch="yes"
-      [[ ! -z $is_from_branch ]] && echo "$branch"
-    fi
-  done
+#  source $TOOLS_ROOT/env/baseline_management.sh
+#  # get the name of the local repo
+#  local_repo=$(basename `git rev-parse --show-toplevel`)
+#  # find in all branch available for this repo in BASELINE_BRANCHES
+#  # this var is define in $TOOLS_ROOT/tools/env/baseline_management.sh
+#  declare -a local_branches=()
+#  for entry in "${!BASELINE_BRANCHES[@]}"; do
+#    tested_repo="${entry#*, }"
+#    if [[ "$local_repo" == "$tested_repo" ]]; then
+#      if [[ ! ${local_branches[*]} =~ ${BASELINE_BRANCHES[$entry]} ]]; then 
+#        local_branches+=(${BASELINE_BRANCHES[$entry]})
+#      fi
+#    fi
+#  done
+#
+#  # we are not in a ouroboros repo, just exit
+#  [[ -z "$local_branches" ]] && exit
+#
+#  # find the sha1 of the last merge starting from HEAD
+#  # NOTE : for this script to work properly, your local branch shall not
+#  # have made local merge since the branch creation
+#  last_merge=$(git log --merges --pretty=format:"%H" -1)
+#
+#  # for each possible starting branch, find if the base of the local branch 
+#  # is a commit of the said starting branch
+#  for branch in "${local_branches[@]}"; do
+#    if [[ $(git rev-parse --verify $branch 2>/dev/null) ]]; then
+#      is_from_branch=$(git log $last_merge..$branch --ancestry-path -1 --pretty=format:"%H")
+#      # this is a ugly case where the last merge is also the searched branch. We could have search for
+#      # last_merge~, but when a branch is just created, it can be erroneos. Thus, in a second time, we
+#      # check if last_merge==branch
+#      [[ -z "$is_from_branch" && "$(git log --pretty=format:"%H" -1 $branch)" == "$last_merge" ]] && is_from_branch="yes"
+#      [[ ! -z $is_from_branch ]] && echo "$branch"
+#    fi
+#  done
+  true
 )
 
