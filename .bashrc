@@ -191,8 +191,6 @@ export DISPLAY=localhost:10.0
 
 export XAUTHORITY=~/.Xauthority
 
-_cs_set_hosts_env
-
 # to be sure to be in front, just redo it
 export PATH="/opt/rust-1.60.0/bin:$PATH"
 #export PATH="~/.cargo/bin/:$PATH"
