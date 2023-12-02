@@ -55,9 +55,6 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 bind '"\e[C": forward-char'
 bind '"\e[D": backward-char'
-# ok I love this too much
-#bind '"\C-p": history-search-backward'
-#bind '"\C_n": history-search-forward'
 
 ##############################################################
 
@@ -135,9 +132,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
 # some more ls aliases
 alias ll='ls -AlFh --color'
 alias la='ls -A'
@@ -166,15 +160,13 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-# Run twolfson/sexy-bash-prompt
-. ~/.bash_prompt
 
 # usefull function for bash utility
-source /home/dev/.local/bin/bash_function.sh
-source /home/dev/.local/bin/git_script.sh
+source ~/.local/bin/bash_function.sh
+source ~/.local/bin/git_script.sh
 
-add_to_path "/home/dev/bin/"
-add_to_path "/home/dev/.local/bin/"
+add_to_path "~/bin/"
+add_to_path "~/.local/bin/"
 
 stty -ixon
 
@@ -185,47 +177,10 @@ export LESS='-i'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# as I have grant w access to all for ouroboros, this tweak avoid the ugly 'other writable' color
-# but this was working on ubuntu, it didn't work since centos.
-# eval "$(dircolors ~/.dircolors)";
-
-# source env file from ouroboros
-pushd ~/ouroboros > /dev/null
-source .envrc css
-popd > /dev/null
 # completion broken by our envrc
 if [[ ! -d "/mnt/remote_repo/other_repo/.oh-my-zsh/plugins/gitfast/" ]]; then
   sudo mount -a
 fi
-# ok it did not mount every time, but take ages so comment for now
-#source /mnt/remote_repo/other_repo/.oh-my-zsh/plugins/gitfast/git-completion.bash
-
-# usefull function for swint framework usage
-# source /home/dev/.local/bin/swint_functions.sh
-
-# if resource, multivio will be MONO by default, so update it according to the reserved rack
-if [ -n "$(cs_getreservedrack)" ]; then
-  _cs_set_rack_multi_vio
-fi
-
-# don't ask my why, without this git doesn't recognise clang-format...
-# it is done in .envrc, but for no fucking reason, if I don't resource
-# it here, git clang is not visible.........
-export CS_ROOT=~/ouroboros
-path_append "$TOOLS_ROOT/scripts/"
-path_append "$CS_ROOT/.bin/"
-
-# disable css linker diversification, cause meh, three time the compile
-# is hard on my shoulder...
-DISABLE_DIVERSIFICATION=1
-export FAST_GENERATION=1
-
-# use of powerline for bash prompt. Need a lot of tweaking to be used on convergence
-# (add of rack state and git integration)
-#. /opt/python2-venv/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-
-# test with clipboard binding. Need xsel, don't have it.
-# bind '"\C-p": "\C-e\C-u xsel <<"EOF"\n\C-y\nEOF\n\C-y"'
 
 # source FZF, this is a general purpose fuzzy file finder
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -234,18 +189,6 @@ export FZF_DEFAULT_OPS="--extended"
 # I don't understand shit to x forward
 export DISPLAY=localhost:10.0
 
-# use man of the current distrib of convergence target
-export MANPATH=/opt/cc-distrib-snap-20230201/poky/sysroots/aarch64-poky-linux/usr/share/man/
-
-m_debug_rust_analyzer() {
-  # executing those lines seems to make rust analyzer work...
-  cargo clippy --workspace --manifest-path /home/dev/ouroboros/reprog/Cargo.toml --target aarch64-unknown-linux-gnu --all-targets --all-features
-}
-
-
-export SWINT_LAYER=TRUE
-export DEBUG_LAYER=debug-tools-small
-#export TRAIN_PARAM=FORCED
 export XAUTHORITY=~/.Xauthority
 
 _cs_set_hosts_env

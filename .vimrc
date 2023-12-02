@@ -286,6 +286,14 @@ set shell=bash\ -l
 
 " PLUGIN:
 " #################"
+
+" autoinstall plug if not available, as adviced here https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " Ok I promise to myself I would not use plugin... but, only idiots do not
 " change their mind right ?
 
