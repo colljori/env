@@ -21,11 +21,11 @@
 	ui = true
 [alias]
     # all under HEAD
-	l  = log --decorate=short --graph --oneline --exclude='*/archive/*'
+	l  = log --decorate=short --graph --oneline
     # all but not archived
-	la = log --decorate=short --graph --oneline --exclude='*/archive/*' --all
+	la = log --decorate=short --graph --oneline --all
     # all, even untrack
-	laa = log --decorate=short --graph --oneline --exclude='*/archive/*' --all --reflog
+	laa = log --decorate=short --graph --oneline --all --reflog
     # all
 	lo = log --decorate=short --graph --oneline --all
 	amend = commit -a --amend -C HEAD
