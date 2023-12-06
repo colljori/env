@@ -198,3 +198,4 @@ export PATH="/opt/rust-1.60.0/bin:$PATH"
 
 # just to be sure, no duplicate in path
 export PATH=$(echo "$PATH" | tr ":" "\n" | awk '!visited[$0]++' | tr "\n" ":")
+. "$HOME/.cargo/env"
